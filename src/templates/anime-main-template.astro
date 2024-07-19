@@ -1,0 +1,40 @@
+---
+import InPageTag from "../components/in-page-tag.astro";
+import {type themeTypes,themeClasses} from "../constants/theme-class";
+import BackButton from "../components/back-button.astro"
+import RatingCard from "../components/rating-card.astro";
+
+const {title,theme,link,photoLink,bgurl} = Astro.props as { title: string; theme: themeTypes; link: string; photoLink: string; bgurl:string};
+const currentTheme = themeClasses[theme] || themeClasses["slate"];
+const photoURL = "/img/" + photoLink
+
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{title}</title>
+</head>
+<body 
+class="bg-slate-900 text-white flex flex-col items-center justify-center gap-5"
+style=`background-image: url(${bgurl}); background-size: cover; background-attachment: fixed;`
+>
+     <div class={`${currentTheme.bgTitle} shadow-lg ${currentTheme.shadow} rounded-xl p-5 w-1/2 text-center text-3xl m-5 border-white border-2 font-extrabold font-serif`}>
+        <h2>
+            <i>{title}</i>
+        </h2>
+    </div>
+    <div class={`flex flex-col justify-center w-1/2 items-center ${currentTheme.bgMain} p-3 rounded-3xl text-center font-medium`}>
+        <img src={photoURL} class="rounded-2xl" width="576" />
+        <InPageTag tag="Description : -" />
+        <slot />
+        <InPageTag tag="Watch Trailer : -" />
+        <iframe width="576" height="315" src={link} title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen class="rounded-xl"></iframe>
+        <InPageTag tag="Ratings : -" />
+        <RatingCard/>
+    </div>
+    <BackButton />
+</body>
+</html>

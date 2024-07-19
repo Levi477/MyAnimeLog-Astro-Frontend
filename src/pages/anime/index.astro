@@ -1,0 +1,45 @@
+---
+
+import AnimeTitleCard from "../../components/anime-title-card.astro"
+import ReviewButton from "../../components/review-button.astro"
+import WebsiteFooter from "../../components/website-footer.astro"
+import WebsiteHeader from "../../components/website-header.astro"
+
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>MyAnimeLog</title>
+	</head>
+	<body class="bg-slate-950 text-white bg-">
+		 <ReviewButton/>
+		 <div class="flex flex-col items-center justify-center">
+			<WebsiteHeader />
+			<AnimeTitleCard name="⦿ Attack On Titan" link="anime/attack-on-titan" />
+			<AnimeTitleCard name="⦿ DeathNote" link="anime/deathnote" />
+			<AnimeTitleCard name="⦿ Naruto" link="anime/naruto" />
+			<AnimeTitleCard name="⦿ Blue Lock" link="anime/blue-lock" />
+			<AnimeTitleCard name="⦿ Fullmetal Alchiemist : Brotherhood" link="anime/fmab" />
+			<AnimeTitleCard name="⦿ One Piece" link="anime/one-piece" />
+			<AnimeTitleCard name="⦿ Solo Leveling" link="anime/solo-leveling" />
+			<AnimeTitleCard name="⦿ Mob Pscho 100" link="anime/mob-psycho-100" />
+			<AnimeTitleCard name="⦿ One Punch Man" link="anime/one-punch-man" />
+			<AnimeTitleCard name="⦿ Parasyte : The Maxim" link="anime/parasyte-the-maxim" />
+			<WebsiteFooter/>
+		 </div>
+		 <div class="fixed top-1 right-1 bg-lime-300 rounded-sm p-3 text-black font-semibold">
+			Hi , <span id="name" class="text-red-500 font-bold"></span>
+		</div>
+		<script>
+			const name = document.getElementById('name') as HTMLSpanElement;
+			const username = localStorage.getItem("username");
+		
+			name.innerText = username || "guest";
+		</script>
+	</body>
+
+</html>
