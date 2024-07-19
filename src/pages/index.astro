@@ -30,6 +30,7 @@
 
     </form>
     <script>
+        import {REGISTER_API_ADD} from "../constants/URI"
 
     const form = document.getElementById('register-form');
     form?.addEventListener('submit', async (e) => {
@@ -41,7 +42,7 @@
         console.log('Sending data:', { username, password });
 
         try {
-            const response = await fetch('http://127.0.0.1:3000/api/register', {
+            const response = await fetch(REGISTER_API_ADD, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
