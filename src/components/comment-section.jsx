@@ -1,4 +1,5 @@
 import { createSignal, createEffect, For } from 'solid-js';
+import { ALL_COMMENT_API_ADD } from "../constants/URI";
 
 const CommentSection = (props) => {
   const [comments, setComments] = createSignal([]);
@@ -6,7 +7,7 @@ const CommentSection = (props) => {
   createEffect(() => {
     const fetchComments = async () => {
       try {
-        const response = await fetch("http://localhost:3000/api/comments");
+        const response = await fetch(ALL_COMMENT_API_ADD);
         const data = await response.json();
         if (data.success) {
             console.log(data.comment_data);
