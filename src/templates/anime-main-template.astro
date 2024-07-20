@@ -2,9 +2,10 @@
 import InPageTag from "../components/in-page-tag.astro";
 import {type themeTypes,themeClasses} from "../constants/theme-class";
 import BackButton from "../components/back-button.astro"
-import RatingCard from "../components/rating-card.astro";
-
-const {title,theme,link,photoLink,bgurl} = Astro.props as { title: string; theme: themeTypes; link: string; photoLink: string; bgurl:string};
+import AddRating from "../components/add-rating.jsx"
+import CommentSection from "../components/comment-section.jsx"
+import AddComment from "../components/add-comment";
+const {title,theme,link,photoLink,bgurl,anime} = Astro.props as { title: string; theme: themeTypes; link: string; photoLink: string; bgurl:string; anime:string;};
 const currentTheme = themeClasses[theme] || themeClasses["slate"];
 const photoURL = "/img/" + photoLink
 
@@ -26,14 +27,17 @@ style=`background-image: url(${bgurl}); background-size: cover; background-attac
             <i>{title}</i>
         </h2>
     </div>
-    <div class={`flex flex-col justify-center w-1/2 items-center ${currentTheme.bgMain} p-3 rounded-3xl text-center font-medium`}>
-        <img src={photoURL} class="rounded-2xl" width="576" />
+    <div class={`flex flex-col justify-center w-2/3 items-center ${currentTheme.bgMain} p-3 rounded-3xl text-center font-medium`}>
+        <img src={photoURL} class="rounded-2xl" class="w-full" />
         <InPageTag tag="Description : -" />
         <slot />
         <InPageTag tag="Watch Trailer : -" />
-        <iframe width="576" height="315" src={link} title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen class="rounded-xl"></iframe>
-        <InPageTag tag="Ratings : -" />
-        <RatingCard/>
+        <iframe class="w-11/12" height="315" src={link} title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen class="rounded-xl"></iframe>
+        <!-- <InPageTag tag="Ratings : -" />
+        <AddRating anime={anime} client:only="solid"/> -->
+        <InPageTag tag="Comments : -" />
+        <AddComment anime={anime} client:only="solid"/>
+        <CommentSection anime={anime} client:only="solid"/>
     </div>
     <BackButton />
 </body>
